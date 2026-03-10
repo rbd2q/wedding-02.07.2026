@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-paper: #fff9e4;
+  --color-brown: #3d2c29;
+  --color-cream: #fff9e4;
+  --color-dark-brown: #4d4637;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply font-sans antialiased;
+  color: var(--color-dark-brown);
+  background-color: var(--color-paper);
+}
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-cormorant);
+    font-weight: 600;
+  }
+}
