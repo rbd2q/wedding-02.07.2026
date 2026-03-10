@@ -1,5 +1,5 @@
-import type { Metadata } from 'next';
-import './globals.css';
+import type { Metadata } from "next";
+import "./globals.css";
 
 import { Comme, Cormorant, Ibarra_Real_Nova } from "next/font/google";
 
@@ -25,9 +25,9 @@ const ibarraRealNova = Ibarra_Real_Nova({
 });
 
 export const metadata: Metadata = {
-  title: 'Ваня и Ангелина — Свадьба 02.07.2026',
+  title: "Ваня и Ангелина — Свадьба 02.07.2026",
   description:
-    'Приглашение на свадьбу. Дорогие родные и близкие, мы будем рады видеть вас среди наших гостей!',
+    "Приглашение на свадьбу. Дорогие родные и близкие, мы будем рады видеть вас среди наших гостей!",
 };
 
 export default function RootLayout({
