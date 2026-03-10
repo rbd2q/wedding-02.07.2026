@@ -1,4 +1,7 @@
+"use client";
+
 import { Container, SectionTitle, MaskedImage } from "@/components/ui";
+import { useInView } from "@/hooks";
 
 const SCHEDULE_IMAGE = "/images/schedule.webp";
 const SCHEDULE_MASK = "/images/mask-schedule.svg";
@@ -11,6 +14,8 @@ const EVENTS = [
 ] as const;
 
 export function Schedule() {
+  const { ref, isInView } = useInView<HTMLUListElement>();
+
   return (
     <section className="relative min-h-[80vh] md:aspect-[1280/1254] md:min-h-0 flex justify-center py-20 md:py-[100px] overflow-hidden">
       <MaskedImage
@@ -26,20 +31,30 @@ export function Schedule() {
         <SectionTitle asOverlay uppercase className="mb-8">
           Программа дня
         </SectionTitle>
-        <ul className="space-y-4 text-white">
-          {EVENTS.map(({ time, label }) => (
-            <li
-              key={time}
-              className="flex flex-col sm:items-center sm:justify-center gap-2 md:gap-4"
-            >
-              <span className="font-cormorant font-semibold text-3xl md:text-section-title leading-none">
-                {time}
-              </span>
-              <span className="font-comme font-light text-lg md:text-section-info leading-none">
-                {label}
-              </span>
-            </li>
-          ))}
+        <ul ref={ref} className="space-y-4 text-white">
+          {EVENTS.map(({ time, label }, index) => {
+            const directionClass =
+              index % 2 ? "animate-slide-in-right" : "animate-slide-in-left";
+
+            return (
+              <li
+                key={time}
+                className={`flex flex-col sm:items-center sm:justify-center gap-2 md:gap-4 opacity-0 ${
+                  isInView ? directionClass : ""
+                }`}
+                style={
+                  isInView ? { animationDelay: `${index * 400}ms` } : undefined
+                }
+              >
+                <span className="font-cormorant font-semibold text-3xl md:text-section-title leading-none">
+                  {time}
+                </span>
+                <span className="font-comme font-light text-lg md:text-section-info leading-none">
+                  {label}
+                </span>
+              </li>
+            );
+          })}
         </ul>
       </Container>
     </section>

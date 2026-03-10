@@ -18,10 +18,10 @@ export function Hero() {
         <h1 className="font-ibarra text-5xl md:text-section-title mb-2 tracking-[0.02em] uppercase">
           Wedding Day
         </h1>
-        <p className="font-cormorant text-2xl md:text-[42px] tracking-wide">
+        <p className="font-cormorant text-2xl md:text-[42px] tracking-wide opacity-0 animate-slide-up-delay-1">
           Ваня и Ангелина
         </p>
-        <p className="font-cormorant text-xl md:text-4xl tracking-wide">
+        <p className="font-cormorant text-xl md:text-4xl tracking-wide opacity-0 animate-slide-up-delay-2">
           02.07.2026
         </p>
       </Container>

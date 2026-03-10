@@ -8,6 +8,27 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      keyframes: {
+        "slide-up": {
+          "0%": { transform: "translateY(24px)", opacity: "0" },
+          "100%": { transform: "translateY(0)", opacity: "1" },
+        },
+        "slide-in-left": {
+          "0%": { transform: "translateX(-40px)", opacity: "0" },
+          "100%": { transform: "translateX(0)", opacity: "1" },
+        },
+        "slide-in-right": {
+          "0%": { transform: "translateX(40px)", opacity: "0" },
+          "100%": { transform: "translateX(0)", opacity: "1" },
+        },
+      },
+      animation: {
+        "slide-up": "slide-up 0.35s ease-out forwards",
+        "slide-up-delay-1": "slide-up 0.35s ease-out 0.35s forwards",
+        "slide-up-delay-2": "slide-up 0.35s ease-out 0.7s forwards",
+        "slide-in-left": "slide-in-left 0.45s ease-out forwards",
+        "slide-in-right": "slide-in-right 0.45s ease-out forwards",
+      },
       fontSize: {
         "section-title": "64px",
         "section-info": "32px",
