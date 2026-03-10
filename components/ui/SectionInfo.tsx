@@ -1,6 +1,6 @@
 import { type ReactNode } from "react";
 
-type SectionInfoProps = {
+interface SectionInfoProps {
   children: ReactNode;
   className?: string;
   asOverlay?: boolean;

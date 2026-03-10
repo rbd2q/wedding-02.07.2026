@@ -1,4 +1,8 @@
-import { InputHTMLAttributes, TextareaHTMLAttributes } from "react";
+import {
+  InputHTMLAttributes,
+  TextareaHTMLAttributes,
+  forwardRef,
+} from "react";
 
 const inputClasses =
   "w-full border-0 border-b-2 border-b-[#4D4637] bg-cream/50 px-0 py-3 placeholder:text-brown/50 focus:border-b-[#4D4637] focus:outline-none focus:ring-0 rounded-none";
@@ -29,26 +33,28 @@ export function FormField({ label, id, error, children }: FormFieldProps) {
   );
 }
 
-export function FormInput({
-  className = "",
-  ...props
-}: InputHTMLAttributes<HTMLInputElement>) {
+export const FormInput = forwardRef<
+  HTMLInputElement,
+  InputHTMLAttributes<HTMLInputElement>
+>(function FormInput({ className = "", ...props }, ref) {
   return (
     <input
+      ref={ref}
       className={`${inputClasses} ${className}`.trim()}
       {...props}
     />
   );
-}
+});
 
-export function FormTextarea({
-  className = "",
-  ...props
-}: TextareaHTMLAttributes<HTMLTextAreaElement>) {
+export const FormTextarea = forwardRef<
+  HTMLTextAreaElement,
+  TextareaHTMLAttributes<HTMLTextAreaElement>
+>(function FormTextarea({ className = "", ...props }, ref) {
   return (
     <textarea
+      ref={ref}
       className={`${textareaClasses} ${className}`.trim()}
       {...props}
     />
   );
-}
+});

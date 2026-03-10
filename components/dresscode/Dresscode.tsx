@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import {
   Container,
   PaperSection,
@@ -9,6 +10,7 @@ import {
 } from "@/components/ui";
 import { useInView } from "@/hooks";
 import { slideUp, delay } from "@/lib/viewport-animation";
+import { DresscodeGallery } from "./DresscodeGallery";
 
 const PALETTE = [
   { name: "Коричневый", color: "#593F3A" },
@@ -20,6 +22,7 @@ const PALETTE = [
 
 export function Dresscode() {
   const { ref, isInView } = useInView();
+  const [isGalleryOpen, setIsGalleryOpen] = useState(false);
 
   return (
     <PaperSection>
@@ -27,7 +30,7 @@ export function Dresscode() {
         <SectionTitle uppercase className="mb-6">
           Дресс-код
         </SectionTitle>
-        <div ref={ref}>
+        <div ref={ref} className="text-center">
           <SectionInfo className={`max-w-xl mx-auto mb-8 ${slideUp(isInView)}`}>
             Так как свадьба будет проходить за городом, будем рады увидеть вас в
             расслабленных костюмах или летящих платьях. Будет особенно приятно,
@@ -47,13 +50,18 @@ export function Dresscode() {
               />
             ))}
           </div>
-          <div
-            className={`text-center ${slideUp(isInView)}`}
+          <PrimaryButton
+            className={slideUp(isInView)}
             style={isInView ? delay(PALETTE.length) : {}}
+            onClick={() => setIsGalleryOpen(true)}
           >
-            <PrimaryButton>Примеры нарядов</PrimaryButton>
-          </div>
+            Примеры нарядов
+          </PrimaryButton>
         </div>
+        <DresscodeGallery
+          isOpen={isGalleryOpen}
+          onClose={() => setIsGalleryOpen(false)}
+        />
       </Container>
     </PaperSection>
   );

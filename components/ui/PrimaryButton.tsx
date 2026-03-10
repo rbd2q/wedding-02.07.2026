@@ -6,7 +6,9 @@ type PrimaryButtonProps = {
   href?: string;
   type?: "button" | "submit";
   className?: string;
+  style?: React.CSSProperties;
   disabled?: boolean;
+  onClick?: () => void;
 };
 
 export function PrimaryButton({
@@ -14,7 +16,9 @@ export function PrimaryButton({
   href,
   type = "button",
   className = "",
+  style = {},
   disabled = false,
+  onClick,
 }: PrimaryButtonProps) {
   const base =
     "rounded-[18px] bg-darkBrown hover:bg-darkerBrown text-white font-semibold px-8 py-4 transition-colors disabled:opacity-60 disabled:cursor-not-allowed";
@@ -26,6 +30,7 @@ export function PrimaryButton({
         target="_blank"
         rel="noopener noreferrer"
         className={`${base} ${className}`}
+        style={style}
       >
         {children}
       </Link>
@@ -33,7 +38,7 @@ export function PrimaryButton({
   }
 
   return (
-    <button type={type} disabled={disabled} className={`${base} ${className}`}>
+    <button type={type} disabled={disabled} className={`${base} ${className}`} style={style} onClick={onClick}>
       {children}
     </button>
   );
