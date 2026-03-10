@@ -1,10 +1,8 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
-import { rsvpSchema, type RsvpFormData } from "@/lib/validation";
-import { submitRsvp } from "@/lib/submitRsvp";
+import { submitRsvp, type RsvpFormData } from "@/lib/submitRsvp";
 import {
   Container,
   PaperSection,
@@ -17,7 +15,9 @@ import {
   FormRadioGroup,
 } from "@/components/ui";
 
-const ATTENDANCE_OPTIONS: { value: string; label: string }[] = [
+const NAME_MIN = 2;
+
+const ATTENDANCE_OPTIONS: { value: "yes" | "no"; label: string }[] = [
   { value: "yes", label: "Я приду / Мы придём" },
   { value: "no", label: "К сожалению, не сможем" },
 ];
@@ -31,11 +31,15 @@ export function RsvpForm() {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors, isSubmitting },
   } = useForm<RsvpFormData>({
-    resolver: zodResolver(rsvpSchema),
-    defaultValues: { attendance: undefined, comment: "" },
+    defaultValues: { name: "", attendance: undefined, comment: "" },
   });
+
+  const nameValue = watch("name");
+  const isNameFilled = (nameValue?.trim() ?? "").length >= NAME_MIN;
+  const isSubmitDisabled = !isNameFilled || isSubmitting;
 
   async function onSubmit(data: RsvpFormData) {
     setSubmitError("");
@@ -74,7 +78,13 @@ export function RsvpForm() {
                 id="name"
                 type="text"
                 placeholder="Имя и фамилия"
-                {...register("name")}
+                {...register("name", {
+                  required: "Введите имя и фамилию",
+                  minLength: {
+                    value: NAME_MIN,
+                    message: "Введите имя и фамилию",
+                  },
+                })}
               />
             </FormField>
 
@@ -83,14 +93,9 @@ export function RsvpForm() {
               name="attendance"
               options={ATTENDANCE_OPTIONS}
               register={register}
-              error={errors.attendance?.message}
             />
 
-            <FormField
-              label="Дополнительная информация"
-              id="comment"
-              error={errors.comment?.message}
-            >
+            <FormField label="Дополнительная информация" id="comment">
               <FormTextarea
                 id="comment"
                 rows={4}
@@ -106,7 +111,7 @@ export function RsvpForm() {
             )}
 
             <div className="mt-10 text-center">
-              <PrimaryButton type="submit" disabled={isSubmitting}>
+              <PrimaryButton type="submit" disabled={isSubmitDisabled}>
                 {isSubmitting ? "Отправка…" : "Отправить"}
               </PrimaryButton>
             </div>

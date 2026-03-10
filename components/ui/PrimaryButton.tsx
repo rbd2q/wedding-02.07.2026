@@ -21,7 +21,7 @@ export function PrimaryButton({
   onClick,
 }: PrimaryButtonProps) {
   const base =
-    "rounded-[18px] bg-darkBrown hover:bg-darkerBrown text-white font-semibold px-8 py-4 transition-colors disabled:opacity-60 disabled:cursor-not-allowed";
+    "rounded-[18px] bg-darkBrown hover:bg-darkerBrown disabled:hover:bg-darkBrown text-white font-semibold px-8 py-4 transition-colors disabled:opacity-60 disabled:cursor-not-allowed";
 
   if (href) {
     return (

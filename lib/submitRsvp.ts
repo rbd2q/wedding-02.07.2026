@@ -1,20 +1,34 @@
-'use server';
+"use server";
 
-import { rsvpSchema, type RsvpFormData } from './validation';
+export type RsvpFormData = {
+  name: string;
+  attendance?: "yes" | "no";
+  comment?: string;
+};
 
-export type SubmitRsvpResult = { success: true } | { success: false; error: string };
+export type SubmitRsvpResult =
+  | { success: true }
+  | { success: false; error: string };
 
-export async function submitRsvp(data: RsvpFormData): Promise<SubmitRsvpResult> {
-  const parsed = rsvpSchema.safeParse(data);
-  if (!parsed.success) {
-    const first = parsed.error.flatten().fieldErrors;
-    const message = Object.values(first).flat().join(' ') || 'Ошибка валидации';
-    return { success: false, error: message };
+const NAME_MIN = 2;
+
+export async function submitRsvp(
+  data: RsvpFormData,
+): Promise<SubmitRsvpResult> {
+  const name = data.name?.trim() ?? "";
+  if (name.length < NAME_MIN) {
+    return { success: false, error: "Введите имя и фамилию" };
   }
 
-  // TODO: persist to database
+  const comment = data.comment?.trim() ?? "";
+
+  // TODO: persist to database (e.g. Supabase)
   // eslint-disable-next-line no-console
-  console.log('RSVP submitted:', parsed.data);
+  console.log("RSVP submitted:", {
+    name,
+    attendance: data.attendance,
+    comment,
+  });
 
   return { success: true };
 }
