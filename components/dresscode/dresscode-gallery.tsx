@@ -29,7 +29,10 @@ const DRESSCODE_IMAGES: readonly DresscodeImage[] = [
   { src: "/images/dresscode/man-8.webp", alt: "Пример наряда для мужчин 8" },
   { src: "/images/dresscode/man-9.webp", alt: "Пример наряда для мужчин 9" },
   { src: "/images/dresscode/woman-9.webp", alt: "Пример наряда для женщин 9" },
-  { src: "/images/dresscode/woman-10.webp", alt: "Пример наряда для женщин 10" },
+  {
+    src: "/images/dresscode/woman-10.webp",
+    alt: "Пример наряда для женщин 10",
+  },
   { src: "/images/dresscode/man-10.webp", alt: "Пример наряда для мужчин 10" },
 ] as const;
 
@@ -45,16 +48,19 @@ export const DresscodeGallery = ({
   initialIndex = 0,
 }: DresscodeGalleryProps) => {
   const [index, setIndex] = useState(initialIndex);
+  const [isLoading, setIsLoading] = useState(true);
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
   const [touchEndX, setTouchEndX] = useState<number | null>(null);
 
   const handlePrev = useCallback(() => {
+    setIsLoading(true);
     setIndex((current) =>
       current === 0 ? DRESSCODE_IMAGES.length - 1 : current - 1,
     );
   }, []);
 
   const handleNext = useCallback(() => {
+    setIsLoading(true);
     setIndex((current) =>
       current === DRESSCODE_IMAGES.length - 1 ? 0 : current + 1,
     );
@@ -76,6 +82,7 @@ export const DresscodeGallery = ({
   useEffect(() => {
     if (!isOpen) return;
     setIndex(initialIndex);
+    setIsLoading(true);
   }, [isOpen, initialIndex]);
 
   const handleTouchStart = (event: TouchEvent<HTMLDivElement>) => {
@@ -147,13 +154,23 @@ export const DresscodeGallery = ({
         onTouchEnd={handleTouchEnd}
       >
         <Image
+          key={index}
           src={current.src}
           alt={current.alt}
           fill
           className="object-contain"
           sizes="(max-width: 768px) 90vw, 700px"
           priority={false}
+          onLoad={() => setIsLoading(false)}
         />
+        {isLoading && (
+          <div
+            className="absolute inset-0 z-10 flex items-center justify-center"
+            aria-hidden
+          >
+            <div className="h-8 w-8 animate-spin rounded-full border-2 border-white border-t-transparent" />
+          </div>
+        )}
       </div>
     </div>
   );
