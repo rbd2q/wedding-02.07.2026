@@ -1,8 +1,12 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import { useState } from "react";
-import { submitRsvp, type Attendance, type RsvpFormData } from "@/lib/submit-rsvp";
+import { useEffect, useState } from "react";
+import {
+  submitRsvp,
+  type Attendance,
+  type RsvpFormData,
+} from "@/lib/submit-rsvp";
 import {
   Container,
   PaperSection,
@@ -14,6 +18,7 @@ import {
   FormTextarea,
   FormRadioGroup,
 } from "@/components/ui";
+import { useRsvpStorage } from "@/hooks";
 import { NAME_MIN } from "@/utils/consts";
 import { SubmitStatus } from "./enums";
 import { RsvpSuccess } from "./rsvp-success";
@@ -33,9 +38,9 @@ export const RsvpForm = () => {
     SubmitStatus.IDLE,
   );
   const [submitError, setSubmitError] = useState("");
-  const [submittedAttendance, setSubmittedAttendance] = useState<
-    Attendance | null
-  >(null);
+  const [submittedAttendance, setSubmittedAttendance] =
+    useState<Attendance | null>(null);
+  const { savedAttendance, saveRsvp } = useRsvpStorage();
 
   const {
     register,
@@ -62,11 +67,21 @@ export const RsvpForm = () => {
     (attendanceValue === "yes" && !transferValue);
   const isTransferVisible = attendanceValue === "yes";
 
+  useEffect(() => {
+    if (savedAttendance) {
+      setSubmittedAttendance(savedAttendance);
+      setSubmitStatus(SubmitStatus.SUCCESS);
+    }
+  }, [savedAttendance]);
+
   const onSubmit = async (data: RsvpFormData) => {
     setSubmitError("");
     const result = await submitRsvp(data);
     if (result.success) {
-      setSubmittedAttendance(data.attendance);
+      const attendance = data.attendance;
+
+      if (attendance) saveRsvp(attendance);
+      setSubmittedAttendance(attendance);
       setSubmitStatus(SubmitStatus.SUCCESS);
     } else {
       setSubmitStatus(SubmitStatus.ERROR);
