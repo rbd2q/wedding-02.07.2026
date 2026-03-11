@@ -1,1 +1,1 @@
-export * from "./rsvp-form";
+export { RsvpForm } from "./rsvp-form";

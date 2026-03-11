@@ -1,1 +1,1 @@
-export * from "./dresscode";
+export { Dresscode } from "./dresscode";

@@ -1,1 +1,1 @@
-export * from "./invitation";
+export { Invitation } from "./invitation";
