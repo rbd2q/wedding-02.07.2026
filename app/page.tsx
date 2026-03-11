@@ -1,11 +1,11 @@
-import { Hero } from '@/components/hero/hero';
-import { Invitation } from '@/components/invitation/invitation';
-import { Location } from '@/components/location/location';
-import { Schedule } from '@/components/schedule/schedule';
-import { Dresscode } from '@/components/dresscode/dresscode';
-import { Details } from '@/components/details/details';
-import { RsvpForm } from '@/components/rsvp/rsvp-form';
-import { Footer } from '@/components/footer/footer';
+import { Hero } from "@/components/hero";
+import { Invitation } from "@/components/invitation";
+import { Location } from "@/components/location";
+import { Schedule } from "@/components/schedule";
+import { Dresscode } from "@/components/dresscode";
+import { Details } from "@/components/details";
+import { RsvpForm } from "@/components/rsvp";
+import { Footer } from "@/components/footer";
 
 const Home = () => (
   <main>

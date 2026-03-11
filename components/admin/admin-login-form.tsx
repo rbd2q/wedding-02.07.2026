@@ -2,8 +2,7 @@
 
 import { useState } from "react";
 import { loginAdmin } from "@/lib/admin-actions";
-import { Container } from "@/components/ui/container";
-import { PrimaryButton } from "@/components/ui/primary-button";
+import { Container, PrimaryButton } from "@/components/ui";
 
 export const AdminLoginForm = () => {
   const [error, setError] = useState("");

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { assertAdmin } from "@/lib/admin-auth";
 import { logoutAdmin } from "@/lib/admin-actions";
 import { getRsvpList } from "@/lib/rsvp";
-import { Container } from "@/components/ui/container";
+import { Container } from "@/components/ui";
 import { AdminLoginForm, RsvpStats, RsvpTable } from "@/components/admin";
 
 type AdminPageProps = {
