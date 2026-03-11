@@ -6,9 +6,7 @@ import { Container } from "@/components/ui/container";
 import { AdminLoginForm, RsvpStats, RsvpTable } from "@/components/admin";
 
 type AdminPageProps = {
-  searchParams: {
-    attendance?: "all" | "yes" | "no";
-  };
+  searchParams: Promise<{ attendance?: "all" | "yes" | "no" }>;
 };
 
 const AdminRsvpPage = async ({ searchParams }: AdminPageProps) => {
@@ -18,8 +16,8 @@ const AdminRsvpPage = async ({ searchParams }: AdminPageProps) => {
   }
 
   const rows = await getRsvpList();
-
-  const attendanceFilter = searchParams.attendance ?? "all";
+  const { attendance } = await searchParams;
+  const attendanceFilter = attendance ?? "all";
   const filteredRows =
     attendanceFilter === "yes"
       ? rows.filter((r) => r.attendance === "yes")
