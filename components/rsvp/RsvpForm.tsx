@@ -14,18 +14,21 @@ import {
   FormTextarea,
   FormRadioGroup,
 } from "@/components/ui";
-
-const NAME_MIN = 2;
+import { NAME_MIN } from "@/utils/consts";
+import { SubmitStatus } from "./enums";
 
 const ATTENDANCE_OPTIONS: { value: "yes" | "no"; label: string }[] = [
   { value: "yes", label: "Я приду / Мы придём" },
   { value: "no", label: "К сожалению, не сможем" },
 ];
 
+const TRANSFER_OPTIONS: { value: "yes" | "no"; label: string }[] = [
+  { value: "yes", label: "Да" },
+  { value: "no", label: "Нет" },
+];
+
 export function RsvpForm() {
-  const [submitStatus, setSubmitStatus] = useState<
-    "idle" | "success" | "error"
-  >("idle");
+  const [submitStatus, setSubmitStatus] = useState<SubmitStatus>(SubmitStatus.IDLE);
   const [submitError, setSubmitError] = useState("");
 
   const {
@@ -34,7 +37,7 @@ export function RsvpForm() {
     watch,
     formState: { errors, isSubmitting },
   } = useForm<RsvpFormData>({
-    defaultValues: { name: "", attendance: undefined, comment: "" },
+    defaultValues: { name: "", attendance: undefined, transfer: undefined, comment: "" },
   });
 
   const nameValue = watch("name");
@@ -45,9 +48,9 @@ export function RsvpForm() {
     setSubmitError("");
     const result = await submitRsvp(data);
     if (result.success) {
-      setSubmitStatus("success");
+      setSubmitStatus(SubmitStatus.SUCCESS);
     } else {
-      setSubmitStatus("error");
+      setSubmitStatus(SubmitStatus.ERROR);
       setSubmitError(result.error);
     }
   }
@@ -60,7 +63,7 @@ export function RsvpForm() {
           Ваши ответы очень помогут нам в организации праздника!
         </SectionInfo>
 
-        {submitStatus === "success" ? (
+        {submitStatus === SubmitStatus.SUCCESS ? (
           <p className="text-center font-medium py-8">
             Спасибо! Ваш ответ принят.
           </p>
@@ -95,6 +98,13 @@ export function RsvpForm() {
               register={register}
             />
 
+            <FormRadioGroup<RsvpFormData>
+              legend="Нужен ли вам трансфер? (от ст. м. «Каменная Горка»)"
+              name="transfer"
+              options={TRANSFER_OPTIONS}
+              register={register}
+            />
+
             <FormField label="Дополнительная информация" id="comment">
               <FormTextarea
                 id="comment"
@@ -104,7 +114,7 @@ export function RsvpForm() {
               />
             </FormField>
 
-            {submitStatus === "error" && submitError && (
+            {submitStatus === SubmitStatus.ERROR && submitError && (
               <p className="text-sm text-red-700" role="alert">
                 {submitError}
               </p>
