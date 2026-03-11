@@ -141,7 +141,7 @@ export const DresscodeGallery = ({
       <button
         type="button"
         aria-label="Закрыть"
-        className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/95 text-xl font-semibold leading-none text-brown shadow-lg ring-1 ring-white/60 transition hover:bg-white"
+        className="absolute right-4 top-4 z-10 flex h-14 w-14 items-center justify-center rounded-full bg-white/95 text-2xl font-semibold leading-none text-brown shadow-lg ring-1 ring-white/60 transition hover:bg-white"
         onClick={onClose}
       >
         ×
@@ -151,17 +151,9 @@ export const DresscodeGallery = ({
         {index + 1} / {DRESSCODE_IMAGES.length}
       </div>
 
-      <div className="flex items-center gap-4 md:gap-8">
-        <button
-          type="button"
-          aria-label="Предыдущее фото"
-          className="z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/90 text-2xl leading-none text-brown shadow-lg ring-1 ring-white/70 transition hover:-translate-x-0.5 hover:bg-white"
-          onClick={handlePrev}
-        >
-          ‹
-        </button>
+      <div className="relative flex w-full max-w-[100vw] items-center justify-center">
         <div
-          className="relative h-[70vh] w-[min(90vw,700px)] max-w-[calc(100vw-8rem)] overflow-hidden rounded-2xl"
+          className="relative h-[70vh] w-[min(90vw,700px)] max-w-[calc(100vw-2rem)] overflow-hidden rounded-2xl"
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
@@ -187,15 +179,23 @@ export const DresscodeGallery = ({
               <div className="h-8 w-8 animate-spin rounded-full border-2 border-white border-t-transparent" />
             </div>
           )}
+          <button
+            type="button"
+            aria-label="Предыдущее фото"
+            className="absolute left-2 top-1/2 z-20 flex h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-3xl leading-none text-brown shadow-lg ring-1 ring-white/70 transition hover:-translate-x-0.5 hover:bg-white md:left-4"
+            onClick={handlePrev}
+          >
+            ‹
+          </button>
+          <button
+            type="button"
+            aria-label="Следующее фото"
+            className="absolute right-2 top-1/2 z-20 flex h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-3xl leading-none text-brown shadow-lg ring-1 ring-white/70 transition hover:translate-x-0.5 hover:bg-white md:right-4"
+            onClick={handleNext}
+          >
+            ›
+          </button>
         </div>
-        <button
-          type="button"
-          aria-label="Следующее фото"
-          className="z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/90 text-2xl leading-none text-brown shadow-lg ring-1 ring-white/70 transition hover:translate-x-0.5 hover:bg-white"
-          onClick={handleNext}
-        >
-          ›
-        </button>
       </div>
     </div>
   );

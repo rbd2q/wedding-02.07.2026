@@ -13,25 +13,18 @@ type RsvpSuccessProps = {
 };
 
 export const RsvpSuccess = ({ attendance }: RsvpSuccessProps) => {
-  const blockRef = useRef<HTMLDivElement>(null);
   const showTelegram = attendance === "yes";
-
-  useEffect(() => {
-    blockRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
-  }, []);
 
   if (!showTelegram) {
     return (
-      <div ref={blockRef}>
-        <p className="text-center text-3xl md:text-5xl text-brown font-medium tracking-wide py-8">
-          Благодарим за ответ!
-        </p>
-      </div>
+      <p className="text-center text-3xl md:text-5xl text-brown font-medium tracking-wide py-8">
+        Благодарим за ответ!
+      </p>
     );
   }
 
   return (
-    <div ref={blockRef} className="flex flex-col items-center text-center max-w-md mx-auto">
+    <div className="flex flex-col items-center text-center max-w-md mx-auto">
       <p className="text-3xl md:text-5xl text-brown font-medium tracking-wide mb-2">
         Благодарим за ответ!
       </p>
