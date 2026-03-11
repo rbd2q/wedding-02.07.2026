@@ -40,13 +40,15 @@ export const metadata: Metadata = {
     title,
     description,
     type: "website",
-    images: [{ url: "/images/footer.png", width: 1200, height: 630, alt: title }],
+    images: [
+      { url: "/images/footer.webp", width: 1200, height: 630, alt: title },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title,
     description,
-    images: ["/images/footer.png"],
+    images: ["/images/footer.webp"],
   },
 };
 
