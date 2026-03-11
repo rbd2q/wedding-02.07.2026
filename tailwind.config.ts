@@ -40,6 +40,7 @@ const config: Config = {
         "2xl": "24px",
       },
       fontWeight: {
+        extralight: "200",
         light: "300",
         normal: "400",
         medium: "500",
@@ -57,11 +58,11 @@ const config: Config = {
         accent: "#8b9d6b",
       },
       fontFamily: {
-        comme: ["var(--font-comme)", "sans-serif"],
+        rubik: ["var(--font-rubik)", "sans-serif"],
         cormorant: ["var(--font-cormorant)", "Georgia", "serif"],
         ibarra: ["var(--font-ibarra)", "Georgia", "serif"],
         // sans по умолчанию, если нужен один из них
-        sans: ["var(--font-comme)", "system-ui", "sans-serif"],
+        sans: ["var(--font-rubik)", "system-ui", "sans-serif"],
       },
       backgroundImage: {
         "torn-top":

@@ -16,7 +16,7 @@ export const RsvpSuccess = ({ attendance }: RsvpSuccessProps) => {
 
   if (!showTelegram) {
     return (
-      <p className="text-center font-cormorant text-2xl md:text-3xl text-brown font-medium tracking-wide py-8">
+      <p className="text-center text-3xl md:text-5xl text-brown font-medium tracking-wide py-8">
         Благодарим за ответ!
       </p>
     );
@@ -24,10 +24,10 @@ export const RsvpSuccess = ({ attendance }: RsvpSuccessProps) => {
 
   return (
     <div className="flex flex-col items-center text-center max-w-md mx-auto">
-      <p className="font-cormorant text-2xl md:text-3xl text-brown font-medium tracking-wide mb-2">
+      <p className="text-3xl md:text-5xl text-brown font-medium tracking-wide mb-2">
         Благодарим за ответ!
       </p>
-      <p className="font-comme font-light text-base md:text-lg text-brown/90 leading-snug mb-8">
+      <p className="font-rubik font-light text-base md:text-lg text-brown/90 leading-snug mb-8">
         Вступайте в наш свадебный чат в Telegram — там будут новости,
         напоминания и полезная информация о празднике.
       </p>

@@ -11,36 +11,33 @@ export type DresscodeImage = {
 };
 
 const DRESSCODE_IMAGES: readonly DresscodeImage[] = [
+  { src: "/images/dresscode/woman-1.webp", alt: "Пример наряда для женщин 1" },
+  { src: "/images/dresscode/woman-2.webp", alt: "Пример наряда для женщин 2" },
+  { src: "/images/dresscode/woman-3.webp", alt: "Пример наряда для женщин 3" },
   { src: "/images/dresscode/man-1.webp", alt: "Пример наряда для мужчин 1" },
   { src: "/images/dresscode/man-2.webp", alt: "Пример наряда для мужчин 2" },
   { src: "/images/dresscode/man-3.webp", alt: "Пример наряда для мужчин 3" },
   { src: "/images/dresscode/man-4.webp", alt: "Пример наряда для мужчин 4" },
   { src: "/images/dresscode/man-5.webp", alt: "Пример наряда для мужчин 5" },
-  { src: "/images/dresscode/man-6.webp", alt: "Пример наряда для мужчин 6" },
-  { src: "/images/dresscode/man-7.webp", alt: "Пример наряда для мужчин 7" },
-  { src: "/images/dresscode/man-8.webp", alt: "Пример наряда для мужчин 8" },
-  { src: "/images/dresscode/man-9.webp", alt: "Пример наряда для мужчин 9" },
-  { src: "/images/dresscode/man-10.webp", alt: "Пример наряда для мужчин 10" },
-  { src: "/images/dresscode/woman-1.webp", alt: "Пример наряда для женщин 1" },
-  { src: "/images/dresscode/woman-2.webp", alt: "Пример наряда для женщин 2" },
-  { src: "/images/dresscode/woman-3.webp", alt: "Пример наряда для женщин 3" },
   { src: "/images/dresscode/woman-4.webp", alt: "Пример наряда для женщин 4" },
   { src: "/images/dresscode/woman-5.webp", alt: "Пример наряда для женщин 5" },
+  { src: "/images/dresscode/man-6.webp", alt: "Пример наряда для мужчин 6" },
+  { src: "/images/dresscode/man-7.webp", alt: "Пример наряда для мужчин 7" },
   { src: "/images/dresscode/woman-6.webp", alt: "Пример наряда для женщин 6" },
   { src: "/images/dresscode/woman-7.webp", alt: "Пример наряда для женщин 7" },
   { src: "/images/dresscode/woman-8.webp", alt: "Пример наряда для женщин 8" },
+  { src: "/images/dresscode/man-8.webp", alt: "Пример наряда для мужчин 8" },
+  { src: "/images/dresscode/man-9.webp", alt: "Пример наряда для мужчин 9" },
   { src: "/images/dresscode/woman-9.webp", alt: "Пример наряда для женщин 9" },
-  {
-    src: "/images/dresscode/woman-10.webp",
-    alt: "Пример наряда для женщин 10",
-  },
+  { src: "/images/dresscode/woman-10.webp", alt: "Пример наряда для женщин 10" },
+  { src: "/images/dresscode/man-10.webp", alt: "Пример наряда для мужчин 10" },
 ] as const;
 
 interface DresscodeGalleryProps {
   isOpen: boolean;
   onClose: () => void;
   initialIndex?: number;
-};
+}
 
 export const DresscodeGallery = ({
   isOpen,
