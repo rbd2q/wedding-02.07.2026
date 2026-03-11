@@ -5,10 +5,8 @@ type ContainerProps = {
   className?: string;
 };
 
-export function Container({ children, className = '' }: ContainerProps) {
-  return (
-    <div className={`mx-auto w-full max-w-3xl px-4 sm:px-6 ${className}`}>
-      {children}
-    </div>
-  );
-}
+export const Container = ({ children, className = '' }: ContainerProps) => (
+  <div className={`mx-auto w-full max-w-3xl px-4 sm:px-6 ${className}`}>
+    {children}
+  </div>
+);

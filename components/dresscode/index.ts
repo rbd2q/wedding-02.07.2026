@@ -1,1 +1,1 @@
-export * from "./Dresscode";
+export * from "./dresscode";

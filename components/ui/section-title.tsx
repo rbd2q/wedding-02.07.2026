@@ -7,12 +7,12 @@ type SectionTitleProps = {
   uppercase?: boolean;
 };
 
-export function SectionTitle({
+export const SectionTitle = ({
   children,
   className = '',
   asOverlay = false,
   uppercase = false,
-}: SectionTitleProps) {
+}: SectionTitleProps) => {
   const base =
     'font-cormorant text-3xl md:text-section-title tracking-wide text-center md:leading-[60px]';
   const color = asOverlay ? 'text-white' : 'text-darkBrown';
@@ -22,4 +22,4 @@ export function SectionTitle({
       {children}
     </h2>
   );
-}
+};

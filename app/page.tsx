@@ -1,15 +1,14 @@
-import { Hero } from '@/components/hero/Hero';
-import { Invitation } from '@/components/invitation/Invitation';
-import { Location } from '@/components/location/Location';
-import { Schedule } from '@/components/schedule/Schedule';
-import { Dresscode } from '@/components/dresscode/Dresscode';
-import { Details } from '@/components/details/Details';
-import { RsvpForm } from '@/components/rsvp/RsvpForm';
-import { Footer } from '@/components/footer/Footer';
+import { Hero } from '@/components/hero/hero';
+import { Invitation } from '@/components/invitation/invitation';
+import { Location } from '@/components/location/location';
+import { Schedule } from '@/components/schedule/schedule';
+import { Dresscode } from '@/components/dresscode/dresscode';
+import { Details } from '@/components/details/details';
+import { RsvpForm } from '@/components/rsvp/rsvp-form';
+import { Footer } from '@/components/footer/footer';
 
-export default function Home() {
-  return (
-    <main>
+const Home = () => (
+  <main>
       <Hero />
       <Invitation />
       <Location />
@@ -19,5 +18,6 @@ export default function Home() {
       <RsvpForm />
       <Footer />
     </main>
-  );
-}
+);
+
+export default Home;

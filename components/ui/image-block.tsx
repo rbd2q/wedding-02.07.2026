@@ -7,13 +7,12 @@ type ImageBlockProps = {
   aspectRatio?: string;
 };
 
-export function ImageBlock({
+export const ImageBlock = ({
   src,
   alt,
   className = '',
   aspectRatio = '16/10',
-}: ImageBlockProps) {
-  return (
+}: ImageBlockProps) => (
     <div
       className={`relative w-full overflow-hidden ${className}`}
       style={{ aspectRatio }}
@@ -27,5 +26,4 @@ export function ImageBlock({
         sizes="100vw"
       />
     </div>
-  );
-}
+);

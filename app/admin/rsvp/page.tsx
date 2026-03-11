@@ -2,13 +2,13 @@ import Link from "next/link";
 import { assertAdmin } from "@/lib/admin-auth";
 import { logoutAdmin } from "@/lib/admin-actions";
 import { getRsvpList } from "@/lib/rsvp";
-import { Container } from "@/components/ui/Container";
-import { AdminLoginForm } from "@/components/admin/AdminLoginForm";
+import { Container } from "@/components/ui/container";
+import { AdminLoginForm } from "@/components/admin/admin-login-form";
 import type { RsvpRow } from "@/lib/rsvp";
-import { AttendanceBadge, TransferBadge } from "@/components/admin/Badge";
+import { AttendanceBadge, TransferBadge } from "@/components/admin/badge";
 import { formatDate } from "@/utils";
 
-async function RsvpTable({ rows }: { rows: RsvpRow[] }) {
+const RsvpTable = async ({ rows }: { rows: RsvpRow[] }) => {
   if (rows.length === 0) {
     return (
       <p className="text-center text-brown/70 py-12 font-medium">
@@ -58,9 +58,9 @@ async function RsvpTable({ rows }: { rows: RsvpRow[] }) {
       </table>
     </div>
   );
-}
+};
 
-export default async function AdminRsvpPage() {
+const AdminRsvpPage = async () => {
   const isAdmin = await assertAdmin();
   if (!isAdmin) {
     return <AdminLoginForm />;
@@ -108,4 +108,6 @@ export default async function AdminRsvpPage() {
       </main>
     </div>
   );
-}
+};
+
+export default AdminRsvpPage;

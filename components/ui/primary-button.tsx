@@ -11,7 +11,7 @@ type PrimaryButtonProps = {
   onClick?: () => void;
 };
 
-export function PrimaryButton({
+export const PrimaryButton = ({
   children,
   href,
   type = "button",
@@ -19,7 +19,7 @@ export function PrimaryButton({
   style = {},
   disabled = false,
   onClick,
-}: PrimaryButtonProps) {
+}: PrimaryButtonProps) => {
   const base =
     "rounded-[18px] bg-darkBrown hover:bg-darkerBrown disabled:hover:bg-darkBrown text-white font-semibold px-8 py-4 transition-colors disabled:opacity-60 disabled:cursor-not-allowed";
 
@@ -42,4 +42,4 @@ export function PrimaryButton({
       {children}
     </button>
   );
-}
+};

@@ -12,7 +12,7 @@ import { slideUp } from "@/lib/viewport-animation";
 const DETAILS_IMAGE = "/images/details.webp";
 const DETAILS_MASK = "/images/mask-details.svg";
 
-export function Details() {
+export const Details = () => {
   const { ref, isInView } = useInView();
 
   return (
@@ -43,4 +43,4 @@ export function Details() {
       </Container>
     </section>
   );
-}
+};

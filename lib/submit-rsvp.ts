@@ -15,9 +15,9 @@ export type SubmitRsvpResult =
   | { success: false; error: string };
 
 
-export async function submitRsvp(
+export const submitRsvp = async (
   data: RsvpFormData,
-): Promise<SubmitRsvpResult> {
+): Promise<SubmitRsvpResult> => {
   const name = data.name?.trim() ?? "";
   if (name.length < NAME_MIN) {
     return { success: false, error: "Введите имя и фамилию" };
@@ -42,4 +42,4 @@ export async function submitRsvp(
   } catch {
     return { success: false, error: "Не удалось отправить. Попробуйте позже." };
   }
-}
+};

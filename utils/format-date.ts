@@ -1,4 +1,4 @@
-export function formatDate(iso: string): string {
+export const formatDate = (iso: string): string => {
   const d = new Date(iso);
   return d.toLocaleDateString("ru-RU", {
     day: "2-digit",
@@ -7,4 +7,4 @@ export function formatDate(iso: string): string {
     hour: "2-digit",
     minute: "2-digit",
   });
-}
+};

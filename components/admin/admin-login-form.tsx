@@ -2,19 +2,19 @@
 
 import { useState } from "react";
 import { loginAdmin } from "@/lib/admin-actions";
-import { Container } from "@/components/ui/Container";
-import { PrimaryButton } from "@/components/ui/PrimaryButton";
+import { Container } from "@/components/ui/container";
+import { PrimaryButton } from "@/components/ui/primary-button";
 
-export function AdminLoginForm() {
+export const AdminLoginForm = () => {
   const [error, setError] = useState("");
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
     const formData = new FormData(e.currentTarget);
     const result = await loginAdmin(formData);
     if (result?.error) setError(result.error);
-  }
+  };
 
   return (
     <div className="min-h-screen bg-paper flex flex-col items-center justify-center px-4">
@@ -46,4 +46,4 @@ export function AdminLoginForm() {
       </Container>
     </div>
   );
-}
+};

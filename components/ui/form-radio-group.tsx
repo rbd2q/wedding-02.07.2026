@@ -10,14 +10,13 @@ type FormRadioGroupProps<T extends FieldValues> = {
   error?: string;
 };
 
-export function FormRadioGroup<T extends FieldValues>({
+export const FormRadioGroup = <T extends FieldValues,>({
   legend,
   name,
   options,
   register,
   error,
-}: FormRadioGroupProps<T>) {
-  return (
+}: FormRadioGroupProps<T>) => (
     <fieldset>
       <legend className="block font-semibold mb-2">{legend}</legend>
       <div className="space-y-2">
@@ -51,5 +50,4 @@ export function FormRadioGroup<T extends FieldValues>({
         </p>
       )}
     </fieldset>
-  );
-}
+);

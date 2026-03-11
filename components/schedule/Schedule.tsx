@@ -13,7 +13,7 @@ const EVENTS = [
   { time: "23:00", label: "Окончание вечера" },
 ] as const;
 
-export function Schedule() {
+export const Schedule = () => {
   const { ref, isInView } = useInView<HTMLUListElement>();
 
   return (
@@ -59,4 +59,4 @@ export function Schedule() {
       </Container>
     </section>
   );
-}
+};

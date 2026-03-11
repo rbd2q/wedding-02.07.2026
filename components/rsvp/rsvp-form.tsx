@@ -2,7 +2,7 @@
 
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { submitRsvp, type RsvpFormData } from "@/lib/submitRsvp";
+import { submitRsvp, type RsvpFormData } from "@/lib/submit-rsvp";
 import {
   Container,
   PaperSection,
@@ -27,7 +27,7 @@ const TRANSFER_OPTIONS: { value: "yes" | "no"; label: string }[] = [
   { value: "no", label: "Нет" },
 ];
 
-export function RsvpForm() {
+export const RsvpForm = () => {
   const [submitStatus, setSubmitStatus] = useState<SubmitStatus>(SubmitStatus.IDLE);
   const [submitError, setSubmitError] = useState("");
 
@@ -44,7 +44,7 @@ export function RsvpForm() {
   const isNameFilled = (nameValue?.trim() ?? "").length >= NAME_MIN;
   const isSubmitDisabled = !isNameFilled || isSubmitting;
 
-  async function onSubmit(data: RsvpFormData) {
+  const onSubmit = async (data: RsvpFormData) => {
     setSubmitError("");
     const result = await submitRsvp(data);
     if (result.success) {
@@ -53,7 +53,7 @@ export function RsvpForm() {
       setSubmitStatus(SubmitStatus.ERROR);
       setSubmitError(result.error);
     }
-  }
+  };
 
   return (
     <PaperSection id="rsvp">
@@ -130,4 +130,4 @@ export function RsvpForm() {
       </Container>
     </PaperSection>
   );
-}
+};

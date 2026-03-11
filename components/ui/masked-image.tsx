@@ -30,7 +30,7 @@ const maskStyle = (maskSrc: string) => ({
   WebkitMaskRepeat: "no-repeat",
 });
 
-export function MaskedImage({
+export const MaskedImage = ({
   src,
   maskSrc,
   alt,
@@ -39,7 +39,7 @@ export function MaskedImage({
   objectFit = "cover",
   objectPosition = "center",
   priority = false,
-}: MaskedImageProps) {
+}: MaskedImageProps) => {
   const objectClassName = OBJECT_FIT_CLASS[objectFit];
 
   return (
@@ -64,4 +64,4 @@ export function MaskedImage({
       </div>
     </div>
   );
-}
+};

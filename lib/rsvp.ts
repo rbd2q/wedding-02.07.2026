@@ -11,7 +11,7 @@ export type RsvpRow = {
 };
 
 
-export async function getRsvpList(): Promise<RsvpRow[]> {
+export const getRsvpList = async (): Promise<RsvpRow[]> => {
   const supabase = getSupabase();
   const { data, error } = await supabase
     .from(RSVP_TABLE)
@@ -20,4 +20,4 @@ export async function getRsvpList(): Promise<RsvpRow[]> {
 
   if (error) return [];
   return (data ?? []) as RsvpRow[];
-}
+};

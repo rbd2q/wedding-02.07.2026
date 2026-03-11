@@ -16,7 +16,7 @@ const LOCATION_MASK = "/images/mask-location.svg";
 const MAP_URL =
   "https://yandex.com/maps/org/ganka/1017457615/?ll=27.083702%2C54.048326&z=17";
 
-export function Location() {
+export const Location = () => {
   const { ref, isInView } = useInView();
 
   return (
@@ -66,4 +66,4 @@ export function Location() {
       </PaperSection>
     </>
   );
-}
+};

@@ -42,11 +42,11 @@ interface DresscodeGalleryProps {
   initialIndex?: number;
 };
 
-export function DresscodeGallery({
+export const DresscodeGallery = ({
   isOpen,
   onClose,
   initialIndex = 0,
-}: DresscodeGalleryProps) {
+}: DresscodeGalleryProps) => {
   const [index, setIndex] = useState(initialIndex);
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
   const [touchEndX, setTouchEndX] = useState<number | null>(null);
@@ -160,4 +160,4 @@ export function DresscodeGallery({
       </div>
     </div>
   );
-}
+};

@@ -1,4 +1,4 @@
-export function AttendanceBadge({ value }: { value: string | null }) {
+export const AttendanceBadge = ({ value }: { value: string | null }) => {
   if (value === "yes")
     return (
       <span className="inline-flex items-center rounded-full bg-olive/20 text-olive px-2.5 py-0.5 text-sm font-medium">
@@ -12,9 +12,9 @@ export function AttendanceBadge({ value }: { value: string | null }) {
       </span>
     );
   return <span className="text-brown/60 text-sm">—</span>;
-}
+};;
 
-export function TransferBadge({ value }: { value: string | null }) {
+export const TransferBadge = ({ value }: { value: string | null }) => {
   if (value === "yes")
     return (
       <span className="inline-flex items-center rounded-full bg-olive/20 text-olive px-2.5 py-0.5 text-sm font-medium">
@@ -28,4 +28,4 @@ export function TransferBadge({ value }: { value: string | null }) {
       </span>
     );
   return <span className="text-brown/60 text-sm">—</span>;
-}
+};

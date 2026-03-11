@@ -17,8 +17,7 @@ type FormFieldProps = {
   children: React.ReactNode;
 };
 
-export function FormField({ label, id, error, children }: FormFieldProps) {
-  return (
+export const FormField = ({ label, id, error, children }: FormFieldProps) => (
     <div>
       <label htmlFor={id} className="block font-semibold mb-1">
         {label}
@@ -30,8 +29,7 @@ export function FormField({ label, id, error, children }: FormFieldProps) {
         </p>
       )}
     </div>
-  );
-}
+);
 
 export const FormInput = forwardRef<
   HTMLInputElement,

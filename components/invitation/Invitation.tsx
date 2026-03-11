@@ -9,7 +9,7 @@ import {
 import { useInView } from "@/hooks";
 import { slideUp } from "@/lib/viewport-animation";
 
-export function Invitation() {
+export const Invitation = () => {
   const { ref, isInView } = useInView();
 
   return (
@@ -32,4 +32,4 @@ export function Invitation() {
       </Container>
     </PaperSection>
   );
-}
+};

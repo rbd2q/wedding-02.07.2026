@@ -10,7 +10,7 @@ import {
 } from "@/components/ui";
 import { useInView } from "@/hooks";
 import { slideUp, delay } from "@/lib/viewport-animation";
-import { DresscodeGallery } from "./DresscodeGallery";
+import { DresscodeGallery } from "./dresscode-gallery";
 
 const PALETTE = [
   { name: "Коричневый", color: "#593F3A" },
@@ -20,7 +20,7 @@ const PALETTE = [
   { name: "Светло-жёлтый", color: "#FFEC9B" },
 ] as const;
 
-export function Dresscode() {
+export const Dresscode = () => {
   const { ref, isInView } = useInView();
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
 
@@ -65,4 +65,4 @@ export function Dresscode() {
       </Container>
     </PaperSection>
   );
-}
+};

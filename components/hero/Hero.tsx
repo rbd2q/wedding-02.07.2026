@@ -3,8 +3,7 @@ import { Container, MaskedImage } from "@/components/ui";
 const HERO_IMAGE = "/images/hero.webp";
 const HERO_MASK = "/images/mask-hero.svg";
 
-export function Hero() {
-  return (
+export const Hero = () => (
     <section className="relative min-h-[85vh] sm:min-h-[90vh] flex items-center justify-center overflow-hidden">
       <MaskedImage
         src={HERO_IMAGE}
@@ -26,5 +25,4 @@ export function Hero() {
         </p>
       </Container>
     </section>
-  );
-}
+);

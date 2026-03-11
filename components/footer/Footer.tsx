@@ -9,8 +9,7 @@ import {
 const FOOTER_IMAGE = "/images/footer.webp";
 const FOOTER_MASK = "/images/mask-footer.svg";
 
-export function Footer() {
-  return (
+export const Footer = () => (
     <section className="relative min-h-[100vh] md:min-h-0 md:aspect-[1280/997] flex items-center justify-center py-20 overflow-hidden">
       <MaskedImage
         src={FOOTER_IMAGE}
@@ -32,5 +31,4 @@ export function Footer() {
         />
       </Container>
     </section>
-  );
-}
+);
