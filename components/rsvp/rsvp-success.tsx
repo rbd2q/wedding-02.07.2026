@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { QRCodeSVG } from "qrcode.react";
 import type { Attendance } from "@/lib/submit-rsvp";
@@ -12,18 +13,25 @@ type RsvpSuccessProps = {
 };
 
 export const RsvpSuccess = ({ attendance }: RsvpSuccessProps) => {
+  const blockRef = useRef<HTMLDivElement>(null);
   const showTelegram = attendance === "yes";
+
+  useEffect(() => {
+    blockRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+  }, []);
 
   if (!showTelegram) {
     return (
-      <p className="text-center text-3xl md:text-5xl text-brown font-medium tracking-wide py-8">
-        Благодарим за ответ!
-      </p>
+      <div ref={blockRef}>
+        <p className="text-center text-3xl md:text-5xl text-brown font-medium tracking-wide py-8">
+          Благодарим за ответ!
+        </p>
+      </div>
     );
   }
 
   return (
-    <div className="flex flex-col items-center text-center max-w-md mx-auto">
+    <div ref={blockRef} className="flex flex-col items-center text-center max-w-md mx-auto">
       <p className="text-3xl md:text-5xl text-brown font-medium tracking-wide mb-2">
         Благодарим за ответ!
       </p>

@@ -1,7 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { type TouchEvent, useCallback, useEffect, useState } from "react";
+import {
+  type TouchEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 export type DresscodeImage = {
   src: string;
@@ -49,18 +55,25 @@ export const DresscodeGallery = ({
 }: DresscodeGalleryProps) => {
   const [index, setIndex] = useState(initialIndex);
   const [isLoading, setIsLoading] = useState(true);
+  const loadedIndicesRef = useRef<Set<number>>(new Set());
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
   const [touchEndX, setTouchEndX] = useState<number | null>(null);
 
+  useEffect(() => {
+    if (loadedIndicesRef.current.has(index)) {
+      setIsLoading(false);
+    } else {
+      setIsLoading(true);
+    }
+  }, [index]);
+
   const handlePrev = useCallback(() => {
-    setIsLoading(true);
     setIndex((current) =>
       current === 0 ? DRESSCODE_IMAGES.length - 1 : current - 1,
     );
   }, []);
 
   const handleNext = useCallback(() => {
-    setIsLoading(true);
     setIndex((current) =>
       current === DRESSCODE_IMAGES.length - 1 ? 0 : current + 1,
     );
@@ -82,8 +95,17 @@ export const DresscodeGallery = ({
   useEffect(() => {
     if (!isOpen) return;
     setIndex(initialIndex);
-    setIsLoading(true);
   }, [isOpen, initialIndex]);
+
+  useEffect(() => {
+    if (isOpen) {
+      const prev = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = prev;
+      };
+    }
+  }, [isOpen]);
 
   const handleTouchStart = (event: TouchEvent<HTMLDivElement>) => {
     setTouchStartX(event.touches[0].clientX);
@@ -119,7 +141,7 @@ export const DresscodeGallery = ({
       <button
         type="button"
         aria-label="Закрыть"
-        className="absolute right-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-white/95 text-sm font-semibold text-brown shadow-lg ring-1 ring-white/60 transition hover:bg-white"
+        className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/95 text-xl font-semibold leading-none text-brown shadow-lg ring-1 ring-white/60 transition hover:bg-white"
         onClick={onClose}
       >
         ×
@@ -129,48 +151,51 @@ export const DresscodeGallery = ({
         {index + 1} / {DRESSCODE_IMAGES.length}
       </div>
 
-      <button
-        type="button"
-        aria-label="Предыдущее фото"
-        className="absolute left-4 top-1/2 z-10 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-lg text-brown shadow-lg ring-1 ring-white/70 transition hover:-translate-y-1/2 hover:-translate-x-0.5 hover:bg-white"
-        onClick={handlePrev}
-      >
-        ‹
-      </button>
-
-      <button
-        type="button"
-        aria-label="Следующее фото"
-        className="absolute right-4 top-1/2 z-10 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-lg text-brown shadow-lg ring-1 ring-white/70 transition hover:-translate-y-1/2 hover:translate-x-0.5 hover:bg-white"
-        onClick={handleNext}
-      >
-        ›
-      </button>
-
-      <div
-        className="relative h-[70vh] w-[min(90vw,700px)] max-w-[calc(100vw-8rem)] overflow-hidden rounded-2xl"
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
-      >
-        <Image
-          key={index}
-          src={current.src}
-          alt={current.alt}
-          fill
-          className="object-contain"
-          sizes="(max-width: 768px) 90vw, 700px"
-          priority={false}
-          onLoad={() => setIsLoading(false)}
-        />
-        {isLoading && (
-          <div
-            className="absolute inset-0 z-10 flex items-center justify-center"
-            aria-hidden
-          >
-            <div className="h-8 w-8 animate-spin rounded-full border-2 border-white border-t-transparent" />
-          </div>
-        )}
+      <div className="flex items-center gap-4 md:gap-8">
+        <button
+          type="button"
+          aria-label="Предыдущее фото"
+          className="z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/90 text-2xl leading-none text-brown shadow-lg ring-1 ring-white/70 transition hover:-translate-x-0.5 hover:bg-white"
+          onClick={handlePrev}
+        >
+          ‹
+        </button>
+        <div
+          className="relative h-[70vh] w-[min(90vw,700px)] max-w-[calc(100vw-8rem)] overflow-hidden rounded-2xl"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
+          <Image
+            key={index}
+            src={current.src}
+            alt={current.alt}
+            fill
+            className="object-contain"
+            sizes="(max-width: 768px) 90vw, 700px"
+            priority={false}
+            onLoad={() => {
+              loadedIndicesRef.current.add(index);
+              setIsLoading(false);
+            }}
+          />
+          {isLoading && (
+            <div
+              className="absolute inset-0 z-10 flex items-center justify-center"
+              aria-hidden
+            >
+              <div className="h-8 w-8 animate-spin rounded-full border-2 border-white border-t-transparent" />
+            </div>
+          )}
+        </div>
+        <button
+          type="button"
+          aria-label="Следующее фото"
+          className="z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/90 text-2xl leading-none text-brown shadow-lg ring-1 ring-white/70 transition hover:translate-x-0.5 hover:bg-white"
+          onClick={handleNext}
+        >
+          ›
+        </button>
       </div>
     </div>
   );
