@@ -28,7 +28,9 @@ const TRANSFER_OPTIONS: { value: "yes" | "no"; label: string }[] = [
 ];
 
 export const RsvpForm = () => {
-  const [submitStatus, setSubmitStatus] = useState<SubmitStatus>(SubmitStatus.IDLE);
+  const [submitStatus, setSubmitStatus] = useState<SubmitStatus>(
+    SubmitStatus.IDLE,
+  );
   const [submitError, setSubmitError] = useState("");
 
   const {
@@ -37,12 +39,24 @@ export const RsvpForm = () => {
     watch,
     formState: { errors, isSubmitting },
   } = useForm<RsvpFormData>({
-    defaultValues: { name: "", attendance: undefined, transfer: undefined, comment: "" },
+    defaultValues: {
+      name: "",
+      attendance: undefined,
+      transfer: undefined,
+      comment: "",
+    },
   });
 
   const nameValue = watch("name");
+  const attendanceValue = watch("attendance");
+  const transferValue = watch("transfer");
   const isNameFilled = (nameValue?.trim() ?? "").length >= NAME_MIN;
-  const isSubmitDisabled = !isNameFilled || isSubmitting;
+  const isSubmitDisabled =
+    !isNameFilled ||
+    isSubmitting ||
+    !attendanceValue ||
+    (attendanceValue === "yes" && !transferValue);
+  const isTransferVisible = attendanceValue === "yes";
 
   const onSubmit = async (data: RsvpFormData) => {
     setSubmitError("");
@@ -98,12 +112,21 @@ export const RsvpForm = () => {
               register={register}
             />
 
-            <FormRadioGroup<RsvpFormData>
-              legend="Нужен ли вам трансфер? (от ст. м. «Каменная Горка»)"
-              name="transfer"
-              options={TRANSFER_OPTIONS}
-              register={register}
-            />
+            <div
+              className={`overflow-hidden transition-[max-height,opacity] duration-300 ${
+                isTransferVisible
+                  ? "max-h-[200px] opacity-100"
+                  : "max-h-0 opacity-0"
+              }`}
+              aria-hidden={!isTransferVisible}
+            >
+              <FormRadioGroup<RsvpFormData>
+                legend="Нужен ли вам трансфер? (от ст. м. «Каменная Горка»)"
+                name="transfer"
+                options={TRANSFER_OPTIONS}
+                register={register}
+              />
+            </div>
 
             <FormField label="Дополнительная информация" id="comment">
               <FormTextarea

@@ -25,7 +25,12 @@ export const submitRsvp = async (
 
   const comment = (data.comment?.trim() ?? "") || null;
   const attendance = data.attendance ?? null;
-  const transfer = data.transfer ?? null;
+  if (attendance !== "yes" && attendance !== "no") {
+    return { success: false, error: "Выберите, придёте ли вы на торжество" };
+  }
+
+  const transfer =
+    attendance === "yes" && data.transfer ? data.transfer : null;
 
   try {
     const supabase = getSupabase();

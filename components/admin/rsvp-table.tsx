@@ -27,7 +27,7 @@ export const RsvpTable = async ({ rows }: { rows: RsvpRow[] }) => {
               <th className="px-4 py-3 font-semibold text-darkBrown">
                 Участие
               </th>
-              <th className="px-4 py-3 font-semibold text-darkBrown">
+              <th className="px-4 py-3 font-semibold text-darkBrown min-w-[120px]">
                 Трансфер
               </th>
               <th className="px-4 py-3 font-semibold text-darkBrown">Дата</th>
@@ -48,7 +48,7 @@ export const RsvpTable = async ({ rows }: { rows: RsvpRow[] }) => {
                 <td className="px-4 py-3">
                   <AttendanceBadge value={row.attendance} />
                 </td>
-                <td className="px-4 py-3">
+                <td className="px-4 py-3 min-w-[120px]">
                   <TransferBadge value={row.transfer} />
                 </td>
                 <td className="px-4 py-3 text-brown/80 text-sm">

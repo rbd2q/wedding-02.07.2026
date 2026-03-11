@@ -14,49 +14,49 @@ export const RsvpStats = ({ rows, attendanceFilter }: RsvpStatsProps) => {
   const transferNoCount = rows.filter((r) => r.transfer === "no").length;
 
   return (
-  <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-    <div className="space-y-1 text-sm">
-      <p className="text-brown/80">
-        Всего ответов:{" "}
-        <span className="font-semibold text-darkBrown">{total}</span>
-      </p>
-      <p className="text-brown/80">
-        Придут:{" "}
-        <span className="font-semibold text-darkBrown">{goingCount}</span>
-        {" · "}
-        Не придут:{" "}
-        <span className="font-semibold text-darkBrown">{notGoingCount}</span>
-      </p>
-      <p className="text-brown/80">
-        Нужен трансфер:{" "}
-        <span className="font-semibold text-darkBrown">
-          {transferYesCount}
-        </span>
-        {" · "}
-        Не нужен:{" "}
-        <span className="font-semibold text-darkBrown">
-          {transferNoCount}
-        </span>
-      </p>
+    <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <div className="space-y-1 text-sm">
+        <p className="text-brown/80">
+          Всего ответов:{" "}
+          <span className="font-semibold text-darkBrown">{total}</span>
+        </p>
+        <p className="text-brown/80">
+          Придут:{" "}
+          <span className="font-semibold text-darkBrown">{goingCount}</span>
+          {" · "}
+          Не придут:{" "}
+          <span className="font-semibold text-darkBrown">{notGoingCount}</span>
+        </p>
+        <p className="text-brown/80">
+          Нужен трансфер:{" "}
+          <span className="font-semibold text-darkBrown">
+            {transferYesCount}
+          </span>
+          {" · "}
+          Не нужен:{" "}
+          <span className="font-semibold text-darkBrown">
+            {transferNoCount}
+          </span>
+        </p>
+      </div>
+      <div className="flex w-full sm:w-auto items-center gap-1 rounded-full bg-paperDark/60 p-1 text-xs sm:text-sm overflow-x-auto">
+        <FilterChip
+          label="Все"
+          isActive={attendanceFilter === "all"}
+          href="/admin/rsvp"
+        />
+        <FilterChip
+          label="Придут"
+          isActive={attendanceFilter === "yes"}
+          href={{ pathname: "/admin/rsvp", query: { attendance: "yes" } }}
+        />
+        <FilterChip
+          label="Не придут"
+          isActive={attendanceFilter === "no"}
+          href={{ pathname: "/admin/rsvp", query: { attendance: "no" } }}
+        />
+      </div>
     </div>
-    <div className="flex w-full sm:w-auto items-center gap-1 rounded-full bg-paperDark/60 p-1 text-xs sm:text-sm overflow-x-auto">
-      <FilterChip
-        label="Все"
-        isActive={attendanceFilter === "all"}
-        href="/admin/rsvp"
-      />
-      <FilterChip
-        label="Только придут"
-        isActive={attendanceFilter === "yes"}
-        href={{ pathname: "/admin/rsvp", query: { attendance: "yes" } }}
-      />
-      <FilterChip
-        label="Только не придут"
-        isActive={attendanceFilter === "no"}
-        href={{ pathname: "/admin/rsvp", query: { attendance: "no" } }}
-      />
-    </div>
-  </div>
   );
 };
 
@@ -78,4 +78,3 @@ const FilterChip = ({ label, isActive, href }: FilterChipProps) => (
     {label}
   </Link>
 );
-
