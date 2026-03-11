@@ -2,7 +2,7 @@
 
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { submitRsvp, type RsvpFormData } from "@/lib/submit-rsvp";
+import { submitRsvp, type Attendance, type RsvpFormData } from "@/lib/submit-rsvp";
 import {
   Container,
   PaperSection,
@@ -16,13 +16,14 @@ import {
 } from "@/components/ui";
 import { NAME_MIN } from "@/utils/consts";
 import { SubmitStatus } from "./enums";
+import { RsvpSuccess } from "./rsvp-success";
 
-const ATTENDANCE_OPTIONS: { value: "yes" | "no"; label: string }[] = [
+const ATTENDANCE_OPTIONS: { value: Attendance; label: string }[] = [
   { value: "yes", label: "Я приду / Мы придём" },
   { value: "no", label: "К сожалению, не сможем" },
 ];
 
-const TRANSFER_OPTIONS: { value: "yes" | "no"; label: string }[] = [
+const TRANSFER_OPTIONS: { value: Attendance; label: string }[] = [
   { value: "yes", label: "Да" },
   { value: "no", label: "Нет" },
 ];
@@ -32,6 +33,9 @@ export const RsvpForm = () => {
     SubmitStatus.IDLE,
   );
   const [submitError, setSubmitError] = useState("");
+  const [submittedAttendance, setSubmittedAttendance] = useState<
+    Attendance | null
+  >(null);
 
   const {
     register,
@@ -41,8 +45,8 @@ export const RsvpForm = () => {
   } = useForm<RsvpFormData>({
     defaultValues: {
       name: "",
-      attendance: undefined,
-      transfer: undefined,
+      attendance: null,
+      transfer: null,
       comment: "",
     },
   });
@@ -62,6 +66,7 @@ export const RsvpForm = () => {
     setSubmitError("");
     const result = await submitRsvp(data);
     if (result.success) {
+      setSubmittedAttendance(data.attendance);
       setSubmitStatus(SubmitStatus.SUCCESS);
     } else {
       setSubmitStatus(SubmitStatus.ERROR);
@@ -78,9 +83,7 @@ export const RsvpForm = () => {
         </SectionInfo>
 
         {submitStatus === SubmitStatus.SUCCESS ? (
-          <p className="text-center font-medium py-8">
-            Спасибо! Ваш ответ принят.
-          </p>
+          <RsvpSuccess attendance={submittedAttendance} />
         ) : (
           <form
             onSubmit={handleSubmit(onSubmit)}

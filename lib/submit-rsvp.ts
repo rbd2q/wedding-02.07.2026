@@ -3,10 +3,12 @@
 import { getSupabase } from "@/lib/supabase/server";
 import { NAME_MIN, RSVP_TABLE } from "@/utils/consts";
 
+export type Attendance = "yes" | "no";
+
 export type RsvpFormData = {
   name: string;
-  attendance?: "yes" | "no";
-  transfer?: "yes" | "no";
+  attendance: Attendance | null;
+  transfer: Attendance | null;
   comment?: string;
 };
 
