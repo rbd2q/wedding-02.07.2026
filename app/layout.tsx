@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-import { Comme, Cormorant, Ibarra_Real_Nova } from "next/font/google";
+import { Cormorant, Ibarra_Real_Nova, Rubik } from "next/font/google";
 
-const comme = Comme({
-  subsets: ["latin"],
-  variable: "--font-comme",
+const rubik = Rubik({
+  subsets: ["latin", "cyrillic"],
+  variable: "--font-rubik",
   display: "swap",
   weight: ["300", "500", "600"],
 });
@@ -60,7 +60,7 @@ export default function RootLayout({
   return (
     <html
       lang="ru"
-      className={`${comme.variable} ${cormorant.variable} ${ibarraRealNova.variable}`}
+      className={`${rubik.variable} ${cormorant.variable} ${ibarraRealNova.variable}`}
     >
       <body className="min-h-screen">{children}</body>
     </html>

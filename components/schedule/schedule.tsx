@@ -49,7 +49,7 @@ export const Schedule = () => {
                 <span className="font-cormorant font-semibold text-3xl md:text-section-title leading-none">
                   {time}
                 </span>
-                <span className="font-comme font-light text-lg md:text-section-info leading-none">
+                <span className="font-rubik font-light text-lg md:text-section-info leading-none">
                   {label}
                 </span>
               </li>

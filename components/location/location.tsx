@@ -36,7 +36,7 @@ export const Location = () => {
           </SectionTitle>
           <address
             ref={ref}
-            className="not-italic font-comme font-light text-lg sm:text-[22px] leading-relaxed mb-8"
+            className="not-italic font-rubik font-light text-lg sm:text-[22px] leading-relaxed mb-8"
           >
             <span
               className={`font-semibold ${slideUp(isInView)}`}
