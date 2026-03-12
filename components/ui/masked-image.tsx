@@ -11,7 +11,10 @@ type MaskedImageProps = {
   priority?: boolean;
 };
 
-const OBJECT_FIT_CLASS: Record<NonNullable<MaskedImageProps["objectFit"]>, string> = {
+const OBJECT_FIT_CLASS: Record<
+  NonNullable<MaskedImageProps["objectFit"]>,
+  string
+> = {
   cover: "object-cover",
   contain: "object-contain",
   fill: "object-fill",

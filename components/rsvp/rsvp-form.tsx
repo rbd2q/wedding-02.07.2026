@@ -92,7 +92,7 @@ export const RsvpForm = () => {
   return (
     <PaperSection id="rsvp">
       <Container>
-        <SectionTitle className="mb-8">Анкета</SectionTitle>
+        <SectionTitle className="mb-8 uppercase">Анкета</SectionTitle>
         <SectionInfo className="mb-8 md:mb-20">
           Ваши ответы очень помогут нам в организации праздника!
         </SectionInfo>
