@@ -1,7 +1,7 @@
-import Image from "next/image";
+import Image, { type StaticImageData } from "next/image";
 
 type MaskedImageProps = {
-  src: string;
+  src: string | StaticImageData;
   maskSrc: string;
   alt: string;
   className?: string;
@@ -41,6 +41,7 @@ export const MaskedImage = ({
   priority = false,
 }: MaskedImageProps) => {
   const objectClassName = OBJECT_FIT_CLASS[objectFit];
+  const placeholder = typeof src === "string" ? "empty" : "blur";
 
   return (
     <div
@@ -57,6 +58,7 @@ export const MaskedImage = ({
           fill
           className={objectClassName}
           style={{ objectPosition }}
+          placeholder={placeholder}
           loading={priority ? undefined : "lazy"}
           priority={priority}
           sizes="100vw"

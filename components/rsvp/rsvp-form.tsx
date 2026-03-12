@@ -150,7 +150,7 @@ export const RsvpForm = () => {
               <FormTextarea
                 id="comment"
                 rows={4}
-                placeholder="(например: сколько человек придет, предпочтения и т.д.)"
+                placeholder="(например: всей ли семьей вы планируете быть, ваши предпочтения и т.д.)"
                 {...register("comment")}
               />
             </FormField>

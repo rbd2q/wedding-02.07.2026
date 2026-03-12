@@ -3,7 +3,7 @@
 import { Container, SectionTitle, MaskedImage } from "@/components/ui";
 import { useInView } from "@/hooks";
 
-const SCHEDULE_IMAGE = "/images/schedule.webp";
+import scheduleImage from "@/public/images/schedule.webp";
 const SCHEDULE_MASK = "/images/mask-schedule.svg";
 
 const EVENTS = [
@@ -17,9 +17,9 @@ export const Schedule = () => {
   const { ref, isInView } = useInView<HTMLUListElement>();
 
   return (
-    <section className="relative min-h-[80vh] md:aspect-[1280/1254] md:min-h-0 flex justify-center py-20 md:py-[100px] overflow-hidden">
+    <section className="relative min-h-[780px] md:aspect-[1280/1254] md:min-h-0 flex justify-center py-20 md:py-[100px] overflow-hidden">
       <MaskedImage
-        src={SCHEDULE_IMAGE}
+        src={scheduleImage}
         maskSrc={SCHEDULE_MASK}
         alt="Wedding day"
         className="absolute inset-0"
