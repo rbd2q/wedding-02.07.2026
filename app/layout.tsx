@@ -62,7 +62,7 @@ export default function RootLayout({
       lang="ru"
       className={`${rubik.variable} ${cormorant.variable} ${ibarraRealNova.variable}`}
     >
-      <body className="min-h-screen">{children}</body>
+      <body>{children}</body>
     </html>
   );
 }

@@ -16,7 +16,7 @@ export const AdminLoginForm = () => {
   };
 
   return (
-    <div className="min-h-screen bg-paper flex flex-col items-center justify-center px-4">
+    <div className="min-h-[480px] bg-paper flex flex-col items-center justify-center px-4">
       <Container className="max-w-sm">
         <h1 className="font-cormorant font-semibold text-3xl text-darkBrown text-center mb-2">
           Админ-панель

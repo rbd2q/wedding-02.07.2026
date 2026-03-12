@@ -26,7 +26,7 @@ const AdminRsvpPage = async ({ searchParams }: AdminPageProps) => {
         : rows;
 
   return (
-    <div className="min-h-screen bg-paper">
+    <div className="min-h-[480px] bg-paper">
       <header className="border-b border-darkBrown/10 bg-cream/30 sticky top-0 z-10">
         <Container className="py-4 flex items-center justify-between bg-paper">
           <h1 className="font-cormorant font-semibold text-2xl text-darkBrown">

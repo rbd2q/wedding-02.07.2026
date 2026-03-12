@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   Container,
@@ -16,7 +16,7 @@ export const Details = () => {
   const { ref, isInView } = useInView();
 
   return (
-    <section className="relative min-h-[90vh] md:min-h-0 md:aspect-[1280/1066] flex justify-center py-20 md:py-[100px] overflow-hidden text-white">
+    <section className="relative min-h-[680px] md:min-h-0 md:aspect-[1280/1066] flex justify-center py-20 md:py-[100px] overflow-hidden text-white">
       <MaskedImage
         src={DETAILS_IMAGE}
         maskSrc={DETAILS_MASK}

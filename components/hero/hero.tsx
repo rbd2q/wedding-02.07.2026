@@ -4,7 +4,7 @@ const HERO_IMAGE = "/images/hero.webp";
 const HERO_MASK = "/images/mask-hero.svg";
 
 export const Hero = () => (
-    <section className="relative min-h-[85vh] sm:min-h-[90vh] flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-[480px] sm:min-h-[90vh] flex items-center justify-center overflow-hidden">
       <MaskedImage
         src={HERO_IMAGE}
         maskSrc={HERO_MASK}

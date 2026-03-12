@@ -17,7 +17,7 @@ export const Schedule = () => {
   const { ref, isInView } = useInView<HTMLUListElement>();
 
   return (
-    <section className="relative min-h-[80vh] md:aspect-[1280/1254] md:min-h-0 flex justify-center py-20 md:py-[100px] overflow-hidden">
+    <section className="relative min-h-[780px] md:aspect-[1280/1254] md:min-h-0 flex justify-center py-20 md:py-[100px] overflow-hidden">
       <MaskedImage
         src={SCHEDULE_IMAGE}
         maskSrc={SCHEDULE_MASK}
