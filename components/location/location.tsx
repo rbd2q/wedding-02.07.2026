@@ -10,7 +10,7 @@ import {
 import { useInView } from "@/hooks";
 import { slideUp, delay } from "@/lib/viewport-animation";
 
-const LOCATION_IMAGE = "/images/location.webp";
+import locationImage from "@/public/images/location.webp";
 const LOCATION_MASK = "/images/mask-location.svg";
 
 const MAP_URL =
@@ -23,7 +23,7 @@ export const Location = () => {
     <>
       <div className="relative w-full" style={{ aspectRatio: "1280/461" }}>
         <MaskedImage
-          src={LOCATION_IMAGE}
+          src={locationImage}
           maskSrc={LOCATION_MASK}
           alt="Wedding venue"
           className="absolute inset-0"

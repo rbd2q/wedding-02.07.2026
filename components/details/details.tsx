@@ -9,7 +9,7 @@ import {
 import { useInView } from "@/hooks";
 import { slideUp } from "@/lib/viewport-animation";
 
-const DETAILS_IMAGE = "/images/details.webp";
+import detailsImage from "@/public/images/details.webp";
 const DETAILS_MASK = "/images/mask-details.svg";
 
 export const Details = () => {
@@ -18,7 +18,7 @@ export const Details = () => {
   return (
     <section className="relative min-h-[680px] md:min-h-0 md:aspect-[1280/1066] flex justify-center py-20 md:py-[100px] overflow-hidden text-white">
       <MaskedImage
-        src={DETAILS_IMAGE}
+        src={detailsImage}
         maskSrc={DETAILS_MASK}
         alt="Wedding rings"
         className="absolute inset-0"

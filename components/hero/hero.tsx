@@ -1,12 +1,12 @@
 import { Container, MaskedImage } from "@/components/ui";
 
-const HERO_IMAGE = "/images/hero.webp";
+import heroImage from "@/public/images/hero.webp";
 const HERO_MASK = "/images/mask-hero.svg";
 
 export const Hero = () => (
     <section className="relative min-h-[480px] sm:min-h-[90vh] flex items-center justify-center overflow-hidden">
       <MaskedImage
-        src={HERO_IMAGE}
+        src={heroImage}
         maskSrc={HERO_MASK}
         alt="Wedding ceremony"
         className="absolute inset-0"

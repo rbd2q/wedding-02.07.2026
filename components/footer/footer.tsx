@@ -6,13 +6,13 @@ import {
   SectionInfo,
 } from "@/components/ui";
 
-const FOOTER_IMAGE = "/images/footer.webp";
+import footerImage from "@/public/images/footer.webp";
 const FOOTER_MASK = "/images/mask-footer.svg";
 
 export const Footer = () => (
     <section className="relative min-h-[780px] md:min-h-[100dvh] md:aspect-[1280/997] flex items-center justify-center py-20 overflow-hidden">
       <MaskedImage
-        src={FOOTER_IMAGE}
+        src={footerImage}
         maskSrc={FOOTER_MASK}
         alt="Couple"
         className="absolute inset-0"
