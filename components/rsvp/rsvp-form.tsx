@@ -1,7 +1,7 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   submitRsvp,
   type Attendance,
@@ -33,6 +33,16 @@ const TRANSFER_OPTIONS: { value: Attendance; label: string }[] = [
   { value: "no", label: "Нет" },
 ];
 
+const createClientId = () => {
+  if (typeof window === "undefined") return "";
+
+  if (typeof crypto !== "undefined" && "randomUUID" in crypto) {
+    return crypto.randomUUID();
+  }
+
+  return `${Date.now()}-${Math.random().toString(16).slice(2)}`;
+};
+
 export const RsvpForm = () => {
   const [submitStatus, setSubmitStatus] = useState<SubmitStatus>(
     SubmitStatus.IDLE,
@@ -40,7 +50,12 @@ export const RsvpForm = () => {
   const [submitError, setSubmitError] = useState("");
   const [submittedAttendance, setSubmittedAttendance] =
     useState<Attendance | null>(null);
-  const { savedAttendance, saveRsvp } = useRsvpStorage();
+  const { savedRsvp, saveRsvp } = useRsvpStorage();
+  const clientIdRef = useRef<string>("");
+
+  if (!clientIdRef.current) {
+    clientIdRef.current = savedRsvp?.id ?? createClientId();
+  }
 
   const {
     register,
@@ -49,6 +64,7 @@ export const RsvpForm = () => {
     formState: { errors, isSubmitting },
   } = useForm<RsvpFormData>({
     defaultValues: {
+      clientId: clientIdRef.current,
       name: "",
       attendance: null,
       transfer: null,
@@ -68,11 +84,11 @@ export const RsvpForm = () => {
   const isTransferVisible = attendanceValue === "yes";
 
   useEffect(() => {
-    if (savedAttendance) {
-      setSubmittedAttendance(savedAttendance);
+    if (savedRsvp) {
+      setSubmittedAttendance(savedRsvp.attendance);
       setSubmitStatus(SubmitStatus.SUCCESS);
     }
-  }, [savedAttendance]);
+  }, [savedRsvp]);
 
   const onSubmit = async (data: RsvpFormData) => {
     setSubmitError("");
@@ -80,8 +96,10 @@ export const RsvpForm = () => {
     if (result.success) {
       const attendance = data.attendance;
 
-      if (attendance) saveRsvp(attendance);
-      setSubmittedAttendance(attendance);
+      if (attendance) {
+        saveRsvp(data);
+        setSubmittedAttendance(attendance);
+      }
       setSubmitStatus(SubmitStatus.SUCCESS);
     } else {
       setSubmitStatus(SubmitStatus.ERROR);
@@ -104,6 +122,7 @@ export const RsvpForm = () => {
             onSubmit={handleSubmit(onSubmit)}
             className="mx-auto space-y-6 text-left"
           >
+            <input type="hidden" {...register("clientId")} />
             <FormField
               label="Введите ваше имя и фамилию"
               id="name"

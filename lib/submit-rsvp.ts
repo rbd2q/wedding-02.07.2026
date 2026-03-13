@@ -6,6 +6,7 @@ import { NAME_MIN, RSVP_TABLE } from "@/utils/consts";
 export type Attendance = "yes" | "no";
 
 export type RsvpFormData = {
+  clientId: string;
   name: string;
   attendance: Attendance | null;
   transfer: Attendance | null;
@@ -20,6 +21,7 @@ export type SubmitRsvpResult =
 export const submitRsvp = async (
   data: RsvpFormData,
 ): Promise<SubmitRsvpResult> => {
+  const clientId = data.clientId || null;
   const name = data.name?.trim() ?? "";
   if (name.length < NAME_MIN) {
     return { success: false, error: "Введите имя и фамилию" };
@@ -37,6 +39,7 @@ export const submitRsvp = async (
   try {
     const supabase = getSupabase();
     const { error } = await supabase.from(RSVP_TABLE).insert({
+      client_id: clientId,
       name,
       attendance,
       transfer,
