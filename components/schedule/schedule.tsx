@@ -10,7 +10,7 @@ const EVENTS = [
   { time: "15:30", label: "Фуршет" },
   { time: "16:00", label: "Выездная регистрация" },
   { time: "17:00", label: "Банкет" },
-  { time: "23:00", label: "Окончание вечера" },
+  { time: "23:30-00:00", label: "Окончание вечера" },
 ] as const;
 
 export const Schedule = () => {
